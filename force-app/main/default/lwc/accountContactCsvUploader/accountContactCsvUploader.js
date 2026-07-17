@@ -297,10 +297,8 @@ export default class AccountContactCsvUploader extends LightningElement {
             });
     }
 
-    // --- CANCEL ---
-    // This component lives directly on the record page, not inside a Quick
-    // Action modal, so there's nothing to "close." Cancel instead discards
-    // whatever CSV/edits are currently loaded and resets the panel.
+    //CANCEL
+
     handleCancel() {
         this.csvData = [];
         this.draftValues = [];
