@@ -1,0 +1,76 @@
+<template>
+    <lightning-card title="Manage Contacts via CSV" icon-name="standard:contact">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+            <!-- Upload / Action Chooser -->
+            <div class="slds-m-bottom_medium">
+
+                <!-- Drag & drop zone (also click-to-browse) -->
+                <div
+                    class={dropZoneClass}
+                    ondragover={handleDragOver}
+                    ondragenter={handleDragOver}
+                    ondragleave={handleDragLeave}
+                    ondrop={handleDrop}
+                    onclick={triggerFileInput}
+                    role="button"
+                    tabindex="0">
+                    <lightning-icon icon-name="utility:upload" size="medium" class="slds-m-bottom_x-small"></lightning-icon>
+                    <p class="slds-text-body_regular">Drag &amp; drop a CSV file here, or click to browse</p>
+                    <template if:true={fileName}>
+                        <p class="slds-text-body_small slds-m-top_x-small file-name">{fileName}</p>
+                    </template>
+                </div>
+
+                <!-- Hidden native file input triggered by the drop zone / click -->
+                <input type="file" accept=".csv" onchange={handleFileUpload} class="slds-hide" lwc:ref="fileInput"/>
+
+                <div class="slds-align_absolute-center slds-m-top_small">
+                    <lightning-button
+                        variant="brand-outline"
+                        label="✏️ Edit & Download Account Contacts"
+                        onclick={loadExistingContacts}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- Preview and Edit Table Section (delegated to child component) -->
+            <template if:true={showTable}>
+                <div class="slds-m-vertical_small">
+                    <span class="slds-text-title_bold">Previewing {recordCount} Records:</span>
+                </div>
+                <div style="height: 300px;">
+                    <c-csv-data-table
+                        data={csvData}
+                        columns={columns}
+                        draft-values={draftValues}
+                        oncellchange={handleCellChange}>
+                    </c-csv-data-table>
+                </div>
+            </template>
+
+            <!-- Action Buttons (no modal on a record page, so these sit inline, not in a footer slot) -->
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button label="Cancel" onclick={handleCancel} class="slds-m-right_x-small"></lightning-button>
+
+                <template if:true={showTable}>
+                    <lightning-button
+                        variant="neutral"
+                        label="Download CSV"
+                        icon-name="utility:download"
+                        onclick={handleDownloadCsv}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+                </template>
+
+                <lightning-button
+                    variant="brand"
+                    label="Save Changes to Salesforce"
+                    onclick={handleCompleteUpload}
+                    disabled={isUploadDisabled}>
+                </lightning-button>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>

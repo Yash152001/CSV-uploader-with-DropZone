@@ -1,0 +1,102 @@
+.section-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-heading {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #706e6b;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Drop zone: distinct card look, not a plain dashed rectangle --- */
+.drop-zone {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px dashed #aebfd1;
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    color: #514f4d;
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.drop-zone-icon {
+    --sds-c-icon-color-foreground-default: #706e6b;
+}
+
+.drop-zone-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #16325c;
+    margin-top: 0.25rem;
+}
+
+.drop-zone-subtitle {
+    font-size: 0.8rem;
+    color: #706e6b;
+    margin-top: 0.15rem;
+}
+
+.drop-zone:hover {
+    border-color: #1589ee;
+    box-shadow: 0 2px 6px rgba(21, 137, 238, 0.15);
+}
+
+.drop-zone:focus {
+    outline: 2px solid #1589ee;
+    outline-offset: 2px;
+}
+
+/* Applied while a file is being dragged over the zone -- visually distinct
+   from the resting/hover state, not just a slightly darker border */
+.drop-zone-active {
+    border: 2px solid #04844b;
+    background: linear-gradient(180deg, #eaf7ee 0%, #d7f0de 100%);
+    color: #04844b;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(4, 132, 75, 0.25);
+}
+
+.drop-zone-active .drop-zone-title,
+.drop-zone-active .drop-zone-subtitle {
+    color: #04844b;
+}
+
+.drop-zone-active .drop-zone-icon {
+    --sds-c-icon-color-foreground-default: #04844b;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #16325c;
+    margin-top: 0.5rem;
+}
+
+/* --- "OR" divider between the two upload paths --- */
+.divider-row {
+    display: flex;
+    align-items: center;
+    margin: 0.75rem 0;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: #dddbda;
+}
+
+.divider-text {
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #a8a8a8;
+    letter-spacing: 0.04em;
+}
